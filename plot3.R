@@ -13,17 +13,22 @@ power <- power[power$Date >= as.Date("2007-02-01","%Y-%m-%d") & power$Date <= as
 
 # summary(power)
 
-power$Global_active_power <- as.numeric(power$Global_active_power)
+power$Sub_metering_1 <- as.numeric(power$Sub_metering_1)
+power$Sub_metering_2 <- as.numeric(power$Sub_metering_2)
 
 ###################################
-# CREATE PLOT 2
+# CREATE PLOT 3
 ###################################
 
-with( power,plot(Date2,Global_active_power, type="n",xlab="", ylab="Global Active Power (kilowatts)"))
-with( power,lines(Date2,Global_active_power))
+with( power,plot(Date2,Sub_metering_1, type="n",xlab="", ylab="Energy sub metering"))
+with( power,lines(Date2,Sub_metering_1, col="black"))
+with( power,lines(Date2,Sub_metering_2, col="red"))
+with( power,lines(Date2,Sub_metering_3, col="blue"))
+legend("top", legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), lwd=2, col=c("black","red","blue"), bty="n")
+
 
 #dev.cur()
-dev.copy(device=png,filename="plot2.png", width=480, height=480)
+dev.copy(device=png,filename="plot3.png", width=480, height=480)
 dev.off()
 
 
